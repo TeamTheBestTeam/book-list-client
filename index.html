@@ -7,9 +7,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   <script src="main.js"></script>
-  <h1>Hello World!</h1>
+  
+  <script type="text/x-handlebars-template" id="book-list">
+        <li class="book-item">
+          <h4>Book: {{title}}</h4>
+          <p>Desciption: {{description}}</p>
+          <p>Author: {{author}}</p>
+          <p>Image URL: {{image_url}}</p>
+          <p>IBSN: {{isbn}}</p>
+        </li>
+      </script>
 </head>
 <body>
-  
+  <h1>Hello World!</h1>
+  <!-- <section>
+    <ul id= "books-database">
+    
+    </ul>
+  </section> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
 </body>
 </html>
