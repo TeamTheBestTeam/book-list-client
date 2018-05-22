@@ -8,7 +8,7 @@
   <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   <script src="main.js"></script>
   
-  <script type="text/x-handlebars-template" id="book-list">
+  <script type="text/x-handlebars-template" id="book-template">
         <li class="book-item">
           <h4>Book: {{title}}</h4>
           <p>Desciption: {{description}}</p>
@@ -19,12 +19,16 @@
       </script>
 </head>
 <body>
-  <h1>Hello World!</h1>
-  <!-- <section>
-    <ul id= "books-database">
-    
-    </ul>
-  </section> -->
+  <main>
+    <section class="error-view container">
+      <h3>Something went wrong</h3>
+      <section id="error-message"></section>
+    </section>
+    <section class="book-view container">
+      <h3>My Books</h3>
+      <ul id="book-list"></ul>
+    </section>
+  </main>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
 </body>
 </html>
