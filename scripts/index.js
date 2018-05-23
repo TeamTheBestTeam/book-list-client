@@ -4,11 +4,11 @@ var app = app || {};
 
 ( function( module ) {
   
-  let productionApiUrl =
+  let productionApiUrl = 'https://jl-ap-booklist.herokuapp.com/'
 
     let developmentApiUrl = 'http://localhost:3000';
   
-  module.isProduction =
+  module.isProduction = /^(?!localhost|127)/.test( window.location.hostname );
   
     module.Environment = {
       apiUrl: module.isProduction ? productionApiUrl : developmentApiUrl
@@ -19,15 +19,12 @@ var app = app || {};
     $().show();
   };
 
-  module.render = (    ) => {
-    if ( !module.taskTemplate ) {
-      module.taskTemplate = Handlebars.compile( $( `#${templateId}` ).text() );
+  module.render = ( templateId, data ) => {
+    if ( !module.bookTemplate ) {
+      module.bookTemplate = Handlebars.compile( $( `#${templateId}` ).text() );
     }
     return module.taskTemplate();
   
   };
-
-
-
 
 } )( app );

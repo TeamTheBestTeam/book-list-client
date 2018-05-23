@@ -20,7 +20,7 @@ var app = app || {};
   Book.all = [];
 
   Book.loadAll = rows => {
-    Book.all = rows.map( task => new Book(  ) );
+    Book.all = rows.map( task => new Book( book ) );
   }
 
   Book.fetchAll = callback =>
@@ -30,7 +30,7 @@ var app = app || {};
       .catch( errorCallback );
 
   Book.createBook = book =>
-    $.post( `${app.ENVIRONMENT.apiUrl}/books/add`,  )
+    $.post( `${app.ENVIRONMENT.apiUrl}/books/add`, book )
       .then( () => page( '/' ) )
       .catch( errorCallback );
 
