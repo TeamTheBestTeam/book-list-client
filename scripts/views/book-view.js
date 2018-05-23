@@ -5,15 +5,15 @@ var app = app || {};
 ( function( module ) {
   const bookView = {};
 
-  bookView.initiIndexPage = function( ctx ) {
+  bookView.initIndexPage = function( ctx ) {
     app.showOnly( '.book-view' );
-    let $taskList = $( '#book-list' );
+    let $bookList = $( '#book-list' );
     $bookList.empty();
     app.Book.all.forEach( book => $bookList.append( book.toHtml() ) );
   };
 
-  bookView.initiAddForm = function() {
-    app.showOnly( '.add-view' );
+  bookView.initAddForm = function() {
+    app.showOnly('.add-view');
 
     $( '#add-form' ).on( 'submit', function( event ) {
       event.preventDefault();
@@ -26,10 +26,10 @@ var app = app || {};
         description: event.target.description.value,
       };
 
-      module.Book.createBook();
+      module.Book.createBook(book);
+    });
+  };
 
-    } );
+  module.bookView = bookView;
 
-  }
-
-} );
+} )(app);

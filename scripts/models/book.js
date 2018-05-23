@@ -20,12 +20,14 @@ var app = app || {};
   Book.all = [];
 
   Book.loadAll = rows => {
-    Book.all = rows.map( task => new Book( book ) );
+    Book.all = rows.map( book => new Book( book ) );
   }
 
   Book.fetchAll = callback =>
-    $.get( `${app.ENVIRONMENT.apiUrl}/books` )
-      .then( Book.loadAll )
+    $.get( `${app.ENVIRONMENT.apiUrl}/api/v1/books` )
+      .then((data) => {
+        Book.loadAll(data.rows);
+      })
       .then( callback )
       .catch( errorCallback );
 
