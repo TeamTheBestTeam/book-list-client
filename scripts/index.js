@@ -10,20 +10,21 @@ var app = app || {};
   
   module.isProduction = /^(?!localhost|127)/.test( window.location.hostname );
   
-    module.Environment = {
+    module.ENVIRONMENT = {
       apiUrl: module.isProduction ? productionApiUrl : developmentApiUrl
     };
 
   module.showOnly = ( selector ) => {
-    $( '.container' ).hide();
-    $().show();
+    $('.container').hide();
+    $(selector).show();
   };
 
   module.render = ( templateId, data ) => {
     if ( !module.bookTemplate ) {
       module.bookTemplate = Handlebars.compile( $( `#${templateId}` ).text() );
+
     }
-    return module.taskTemplate();
+    return module.bookTemplate(data);
   
   };
 

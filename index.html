@@ -5,16 +5,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Page Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-  <script src="main.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen" href="/styles/base.css" />
+  
   
   <script type="text/x-handlebars-template" id="book-template">
         <li class="book-item">
           <h4>Book: {{title}}</h4>
-          <p>Desciption: {{description}}</p>
+          <p>Description: {{description}}</p>
           <p>Author: {{author}}</p>
-          <p>Image URL: {{image_url}}</p>
-          <p>IBSN: {{isbn}}</p>
+          <p>Image URL: <img src={{image_url}}>  </p>
+          <p>ISBN: {{isbn}}</p>
         </li>
       </script>
 </head>
@@ -33,6 +33,12 @@
       <section id="about-message"></section>
     </section>
   </main>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+  <script src="/scripts/index.js"></script>
+  <script src="/scripts/views/book-view.js"></script>
+  <script src="/scripts/views/error-view.js"></script>
+  <script src="/scripts/models/book.js"></script>
+  <script>app.Book.fetchAll(app.bookView.initIndexPage)</script>
 </body>
 </html>
