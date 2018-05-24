@@ -23,6 +23,10 @@ var app = app || {};
     Book.all = rows.map( book => new Book( book ) );
   }
 
+  Book.loadOne = book => {
+    Book.all = new Book (book);
+  }
+
   Book.fetchAll = callback =>
     $.get( `${app.ENVIRONMENT.apiUrl}/api/v1/books` )
       .then((data) => {
@@ -32,14 +36,18 @@ var app = app || {};
       .catch( errorCallback );
 
   Book.createBook = book =>
-    $.post( `${app.ENVIRONMENT.apiUrl}/books/add`, book )
+    $.post( `${app.ENVIRONMENT.apiUrl}/api/v1/books`, book )
       .then( () => page( '/' ) )
       .catch( errorCallback );
 
   Book.fetchOne = ( ctx ) => {
-    console.log( ctx );
+    $.get(`${app.ENVIRONMENT.apiUrl}/api/v1/books/${ctx.params.id}`)
+    .then(Book.loadOne)
+
     $( '.book-item' ).hide();
-    $( `.book-item[data-book-id="${ctx.params.book_id}"]` ).show();
+    $( `.book-item[data-book-id="${ctx.params.id}"]` ).show();
+    
+    console.log(ctx.params.id)
   };
 
   module.Book = Book;
