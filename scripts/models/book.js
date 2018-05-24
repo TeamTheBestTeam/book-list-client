@@ -18,13 +18,18 @@ var app = app || {};
   }
 
   Book.all = [];
+  Book.single = null;
 
   Book.loadAll = rows => {
     Book.all = rows.map( book => new Book( book ) );
   }
 
   Book.loadOne = book => {
-    Book.all = new Book (book);
+    Book.single = new Book(book);
+    console.log(Book.all);
+    Book.all = [];
+    Book.all.push(new Book (book));
+    console.log(Book.all);
   }
 
   Book.fetchAll = callback =>
@@ -40,12 +45,14 @@ var app = app || {};
       .then( () => page( '/' ) )
       .catch( errorCallback );
 
-  Book.fetchOne = ( ctx ) => {
+  Book.fetchOne = (ctx, callback) => {
     $.get(`${app.ENVIRONMENT.apiUrl}/api/v1/books/${ctx.params.id}`)
-    .then(Book.loadOne)
+    .then( data => Book.loadOne(data[0]))
+    .then(callback)
+    .catch(console.log);
 
-    $( '.book-item' ).hide();
-    $( `.book-item[data-book-id="${ctx.params.id}"]` ).show();
+    // $( '.book-item' ).hide();
+    // $( `.book-item[data-book-id="${ctx.params.id}"]` ).show();
     
     console.log(ctx.params.id)
   };

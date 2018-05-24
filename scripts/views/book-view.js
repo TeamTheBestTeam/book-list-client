@@ -16,8 +16,10 @@ var app = app || {};
     app.showOnly('.detail-view');
     let $detailList = $('#detail-list');
     $detailList.empty();
-    app.Book.all.forEach( book => $detailList.append(book.toHtml()));x
-  }
+    //app.Book.all.forEach(book => $detailList.append(book.toHtml()));
+    $detailList.append(app.Book.single.toHtml());
+    //$detailList.append(ctx.toHtml());
+  };
 
   bookView.initAddForm = function() {
     app.showOnly('.add-view');
