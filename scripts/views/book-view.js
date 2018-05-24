@@ -5,11 +5,20 @@ var app = app || {};
 ( function( module ) {
   const bookView = {};
 
-  bookView.initIndexPage = function( ctx ) {
-    app.showOnly( '.book-view' );
-    let $bookList = $( '#book-list' );
+  bookView.initIndexPage = function(ctx) {
+    app.showOnly('.book-view');
+    let $bookList = $('#book-list');
     $bookList.empty();
     app.Book.all.forEach( book => $bookList.append( book.toHtml() ) );
+  };
+
+  bookView.initDetailPage = function(ctx) {
+    app.showOnly('.detail-view');
+    let $detailList = $('#detail-list');
+    $detailList.empty();
+    //app.Book.all.forEach(book => $detailList.append(book.toHtml()));
+    $detailList.append(app.Book.single.toHtml());
+    //$detailList.append(ctx.toHtml());
   };
 
   bookView.initAddForm = function() {

@@ -18,9 +18,18 @@ var app = app || {};
   }
 
   Book.all = [];
+  Book.single = null;
 
   Book.loadAll = rows => {
     Book.all = rows.map( book => new Book( book ) );
+  }
+
+  Book.loadOne = book => {
+    Book.single = new Book(book);
+    console.log(Book.all);
+    Book.all = [];
+    Book.all.push(new Book (book));
+    console.log(Book.all);
   }
 
   Book.fetchAll = callback =>
@@ -32,14 +41,20 @@ var app = app || {};
       .catch( errorCallback );
 
   Book.createBook = book =>
-    $.post( `${app.ENVIRONMENT.apiUrl}/books/add`, book )
+    $.post( `${app.ENVIRONMENT.apiUrl}/api/v1/books`, book )
       .then( () => page( '/' ) )
       .catch( errorCallback );
 
-  Book.fetchOne = ( ctx ) => {
-    console.log( ctx );
-    $( '.book-item' ).hide();
-    $( `.book-item[data-book-id="${ctx.params.book_id}"]` ).show();
+  Book.fetchOne = (ctx, callback) => {
+    $.get(`${app.ENVIRONMENT.apiUrl}/api/v1/books/${ctx.params.id}`)
+    .then( data => Book.loadOne(data[0]))
+    .then(callback)
+    .catch(console.log);
+
+    // $( '.book-item' ).hide();
+    // $( `.book-item[data-book-id="${ctx.params.id}"]` ).show();
+    
+    console.log(ctx.params.id)
   };
 
   module.Book = Book;
