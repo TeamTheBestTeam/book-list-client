@@ -31,16 +31,21 @@ var app = app || {};
       .then( callback )
       .catch( errorCallback );
 
+  Book.loadOne = book => new Book( book );
+  
+  Book.fetchOne = ( ctx, callback ) => {
+    $.get( `${app.ENVIRONMENT.apiUrl}/api/v1/books/${ctx.params.id}` )
+      .then( data => Book.loadOne( data[ 0 ] ) )
+      .then( book => callback( book ) )
+      .catch( errorCallback );
+  }
+    
+
   Book.createBook = book =>
-    $.post( `${app.ENVIRONMENT.apiUrl}/books/add`, book )
+    $.post( `${app.ENVIRONMENT.apiUrl}/api/v1/books/`, book )
       .then( () => page( '/' ) )
       .catch( errorCallback );
 
-  Book.fetchOne = ( ctx ) => {
-    console.log( ctx );
-    $( '.book-item' ).hide();
-    $( `.book-item[data-book-id="${ctx.params.book_id}"]` ).show();
-  };
-
   module.Book = Book;
+
 } )( app );
